@@ -3,85 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My JS simulations</title>
-
-  <!-- D3 and your chart helper stay as they were -->
-  <script src="https://d3js.org/d3.v7.js"></script>
-  <script src="./js/draw_line_chart.js"></script>
+  <title>My Science Projects</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>Hello Renaud!</h1>
-  <h2>
-    Nature in Code<br>
-    Chapter 8: Cooperation: Good Guys Can Finish First.
-  </h2>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-overlay">
+      <h1>My Science Showcase</h1>
+      <p>Exploring the wonders of physics, chemistry & maths</p>
+    </div>
+  </header>
 
-  <!-- 1) Dropdown + Reload button -->
-  <label for="demoSelector">Choose demo:</label>
-  <select id="demoSelector">
-    <option value="p1">Cooperators vs Defectors</option>
-    <option value="p2">Tit for Tat</option>
-    <option value="p3">Win-Stay, Lose-Shift</option>
-    <option value="all">All</option>
-  </select>
-  <button id="reloadButton">Reload</button>
+  <!-- Projects Grid -->
+  <section class="projects-grid">
+    <a href="projects/p1_game_theory/index.html" class="project-card">
+      <img src="projects/p1_game_theory/images/game_theory_thumb.jpg" alt="Project 1 Preview" />
+      <h2>Game Theory</h2>
+    </a>
+    <a href="projects/p2_brownian_motion/index.html" class="project-card">
+      <img src="projects/p2_brownian_motion/images/Brownian_motion_thumb.gif" alt="Project 2 Preview" />
+      <h2>Brownian Motion at Home</h2>
+    </a>
+    <!-- add more cards as needed -->
+  </section>
 
-  <!-- 2) Chart container (not strictly required since your scripts append to <body>, 
-         but handy if you refactor later) -->
-  <div id="chartArea"></div>
+  <!-- <script src="js/main.js"></script> -->
 
-  <!-- 3) Loader logic -->
-  <script>
-  (function() {
-    const demoMap = {
-      p1: './js/script_p1.js',
-      p2: './js/script_p2.js',
-      p3: './js/script_p3.js'
-    };
-
-    function clearCharts() {
-      // remove every chart SVG
-      document.querySelectorAll('svg').forEach(el => el.remove());
-      // remove every <p> inserted by your scripts
-      document.querySelectorAll('body > p').forEach(el => el.remove());
-      // remove previously injected demo scripts
-      document.querySelectorAll('[data-demo-script]').forEach(s => s.remove());
-    }
-
-    function loadDemo(src) {
-      return new Promise((resolve, reject) => {
-        const tag = document.createElement('script');
-        tag.src = src;
-        tag.setAttribute('data-demo-script', '');
-        tag.onload  = () => resolve();
-        tag.onerror = () => reject(new Error(`Failed to load ${src}`));
-        document.body.appendChild(tag);
-      });
-    }
-
-    async function runSelection() {
-      clearCharts();
-      const choice = document.getElementById('demoSelector').value;
-      const toLoad = choice === 'all'
-        ? Object.values(demoMap)
-        : [ demoMap[choice] ];
-
-      for (const src of toLoad) {
-        await loadDemo(src);
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      // wire up both controls *after* they exist in the DOM
-      document.getElementById('demoSelector')
-              .addEventListener('change', runSelection);
-      document.getElementById('reloadButton')
-              .addEventListener('click', runSelection);
-
-      // run the default selection on page load
-      runSelection();
-    });
-  })();
-  </script>
 </body>
 </html>

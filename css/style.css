@@ -78,10 +78,16 @@ body { font-family: sans-serif; line-height: 1.6; background-color: #242424; }
 
 /* Optional: clamp long titles to two lines so heights match even better */
 .project-card h2 {
+    /* Standard property */
+  line-clamp: 2;
+
+  /* Legacy/WebKit fallback */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden; /* ensures content is clipped */
+  
   line-height: 1.2;
   min-height: calc(1.2em * 2); /* ensure consistent height for two lines */
 }
@@ -96,3 +102,6 @@ body { font-family: sans-serif; line-height: 1.6; background-color: #242424; }
 @media (min-width: 1024px) {
   .hero { background-position: 50% 80%; } /* adjust to taste */
 }
+
+/* 5. Specific styles for project pages */
+body.page-project-white { background-color: #fff; }

@@ -31,38 +31,61 @@ body { font-family: sans-serif; line-height: 1.6; background-color: #242424; }
 .hero-overlay p { font-size: 1.2rem; margin-top: 0.5rem; }
 
 /* 3. Projects Grid */
+/* Grid: make items stretch so cards can be equal height per row */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   padding: 2rem;
+  align-items: stretch; /* key */
 }
+
+/* Card becomes a column flexbox */
 .project-card {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
+  background: #fff;          /* keep it white on grey background */
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.2s ease;
-  
-  background: #fff;
-  /* optional: subtle base shadow */
-  box-shadow: 0 1px 2px rgba(0,0,0,.04);
-
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;              /* fill the grid track height */
 }
+
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-.project-card img {
+
+/* Normalize thumbnail height with cropping for consistency */
+.project-card img.thumb {
   width: 100%;
+  aspect-ratio: 16 / 9;      /* pick the ratio you like (e.g., 4/3) */
+  object-fit: contain;         /* crops to the ratio while filling */
   display: block;
 }
+
+/* Push title to the bottom of the card */
 .project-card h2 {
-  padding: 0.5rem;
+  margin: 0;
+  padding: 0.75rem;
   font-size: 1.1rem;
   text-align: center;
+  margin-top: auto;          /* this pins it to the bottom */
 }
+
+/* Optional: clamp long titles to two lines so heights match even better */
+.project-card h2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2;
+  min-height: calc(1.2em * 2); /* ensure consistent height for two lines */
+}
+
 
 /* 4. Responsive Text Scaling */
 @media (max-width: 600px) {

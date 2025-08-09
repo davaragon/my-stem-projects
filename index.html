@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="0a9e2c4e-c6d5-4b71-9e14-b4fdc20c48b8" data-blockingmode="auto" type="text/javascript"></script>
-  <script src="/js/ga-init.js"></script>
+  <!-- Cookiebot (must be first in <head>) -->
+<script id="Cookiebot"
+  src="https://consent.cookiebot.com/uc.js"
+  data-cbid="0a9e2c4e-c6d5-4b71-9e14-b4fdc20c48b8"
+  data-blockingmode="auto"
+  type="text/javascript">
+</script>
+
+<!-- Defer GA init until consent is given -->
+<script type="text/plain" data-cookieconsent="statistics" src="/js/ga-init.js"></script>
+
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Science Projects</title>
   <link rel="stylesheet" href="css/style.css" /> 
-  
+
 </head>
 <body> 
    
